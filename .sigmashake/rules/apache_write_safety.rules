@@ -5,10 +5,9 @@ rule apache-server-tokens {
   enabled true
   priority 90
   severity warning
-  ASK write
+  LOG write
   IF path GLOB "**/*.conf" AND content NOT LINE_REGEX "ServerTokens\\s+Prod"
   MESSAGE "Apache reveals its version and OS information by default. Attackers use this for reconnaissance. Add 'ServerTokens Prod' to hide version details."
-  PROMPT "Are you sure you want to expose the Apache version details? 'ServerTokens Prod' is recommended."
 }
 
 rule apache-directory-listing {
